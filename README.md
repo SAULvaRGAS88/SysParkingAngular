@@ -1,27 +1,70 @@
-# SysParkingAngular
+# SysParking
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+## Introdução
+Um empresário adquiriu recentemente uma rede de estacionamentos que operava com um sistema manual, no qual as entradas e saídas de veículos eram registradas em papel, sem controle integrado com os pagamentos. Essa gestão manual resultava em ineficiências e dificuldades no monitoramento financeiro e operacional dos estacionamentos.
 
-## Development server
+## Descrição do Problema
+A ausência de uma solução automatizada e integrada, devido ao sistema arcaico da administração anterior, gerou desafios para a nova administração. Entre eles:
+- Falta de visibilidade sobre a disponibilidade de vagas
+- Ineficiência na gestão de pagamentos
+- Dificuldade no acompanhamento das movimentações diárias e no controle financeiro
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Objetivo
+Desenvolver o **SysParking**, um sistema integrado que permite:
+1. Controle de acesso de veículos aos estacionamentos.
+2. Monitoramento em tempo real dos fluxos de caixa.
+3. Maior eficiência e transparência nas operações.
+4. Melhoria na experiência dos funcionários e administradores na gestão de estacionamentos.
 
-## Code scaffolding
+## Solução Proposta
+O **SysParking** será desenvolvido em Angular, com as seguintes funcionalidades:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 1. Dois Tipos de Acesso
+- **Usuário (funcionário):**
+  - Controle de entrada e saída de veículos
+  - Visualização da disponibilidade de vagas
+  - Registro e gestão de pagamentos
 
-## Build
+- **Administrador (supervisor/dono):**
+  - Acesso completo para configuração e gestão do sistema
+  - Visualização de relatórios em tempo real sobre o fluxo financeiro e operacional
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 2. Disponibilidade de Vagas
+O sistema exibirá a disponibilidade de vagas em tempo real, facilitando o controle do fluxo de veículos e otimizando a ocupação dos estacionamentos.
 
-## Running unit tests
+### 3. Entrada e Saída de Veículos
+Cada veículo será registrado com os seguintes dados:
+- Modelo, marca e placa
+- Horário de entrada e saída
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Os funcionários serão responsáveis por registrar e atualizar esses dados no sistema.
 
-## Running end-to-end tests
+### 4. Tabela de Preços
+Configuração de tarifas por período:
+- Tarifação baseada em horas, dias, ou períodos personalizados.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 5. Pagamentos
+- **Cálculo automático** do custo baseado no tempo de permanência e na tabela de preços vigente.
+- Suporte a diversas formas de pagamento:
+  - Cartão de crédito, dinheiro e métodos digitais
+- Todos os pagamentos serão registrados pelos funcionários e monitorados em tempo real.
 
-## Further help
+### 6. Relatórios
+- **Relatórios financeiros** detalhados para o administrador, com informações sobre:
+  - Fluxo de caixa diário, semanal e mensal
+  - Entrada e saída de veículos
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Conclusão
+O **SysParking** permitirá uma gestão eficiente e organizada dos estacionamentos, ao mesmo tempo que oferece maior controle e transparência nas operações financeiras para a administração. Essa solução facilitará a modernização dos processos e proporcionará uma experiência de uso prática e funcional para os funcionários e administradores.
+
+---
+
+**Tecnologia**: Desenvolvido em Angular
+
+**Objetivo Final**: Otimização da gestão de estacionamentos e melhoria no acompanhamento financeiro e operacional.
+
+## 👨‍💻 Desenvolvedor
+**Saul Vargas**
+
+- 🔗 [LinkedIn](https://www.linkedin.com/in/saul-vargas-68a9734)
+- 📞 [WhatsApp](https://wa.me/5551985027412?text=Olá%20Saul!)
