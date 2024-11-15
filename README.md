@@ -63,6 +63,9 @@ O **SysParking** permitirá uma gestão eficiente e organizada dos estacionament
 
 **Objetivo Final**: Otimização da gestão de estacionamentos e melhoria no acompanhamento financeiro e operacional.
 
+## Diagrama de Classes
+![Diagrama de Classes](SysParking.drawio.png)
+
 ## 👨‍💻 Desenvolvedor
 **Saul Vargas**
 
