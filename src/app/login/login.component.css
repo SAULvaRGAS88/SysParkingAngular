@@ -1,0 +1,17 @@
+/* Centraliza o cartão de login na tela */
+.container {
+    background-color: #000;
+  }
+  
+  /* Estilo para o título e o fundo do cartão */
+  .card {
+    background-color: #1a1a1a;
+  }
+  
+  /* Botão de login */
+  .btn-outline-light:hover {
+    background-color: #333;
+    color: #fff;
+    border-color: #666;
+  }
+  
