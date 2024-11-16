@@ -10,13 +10,15 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { MenuHeaderComponent } from './components/menu-header/menu-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    RelatoriosComponent
+    RelatoriosComponent,
+    MenuHeaderComponent
   ],
   imports: [
     BrowserModule,
