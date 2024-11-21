@@ -11,6 +11,12 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { MenuHeaderComponent } from './components/menu-header/menu-header.component';
+import { ColaboradoresComponent } from './colaboradores/colaboradores.component';
+import { NotaComponent } from './nota/nota.component';
+import { EstacionamentoComponent } from './estacionemento/estacionemento.component';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { EstacionamentoSelecionadoComponent } from './estacionemento/estacionamento-selecionado/estacionamento-selecionado.component';
 
 @NgModule({
   declarations: [
@@ -18,16 +24,23 @@ import { MenuHeaderComponent } from './components/menu-header/menu-header.compon
     LoginComponent,
     DashboardComponent,
     RelatoriosComponent,
-    MenuHeaderComponent
+    MenuHeaderComponent,
+    EstacionamentoComponent,
+    ColaboradoresComponent,
+    NotaComponent,
+    EstacionamentoSelecionadoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AngularFirestoreModule,
   ],
   providers: [
-    provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

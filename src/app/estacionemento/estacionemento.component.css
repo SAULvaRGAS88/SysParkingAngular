@@ -1,0 +1,28 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  .btn {
+    font-weight: bold;
+  }
+  
+  h1, h2 {
+    color: #ffffff;
+  }
+  
+  .list-group-item-dark {
+    background-color: #1f1f1f;
+    border: none;
+  }
+  
+  .list-group-item-dark p {
+    margin: 0;
+  }
+
+  ::ng-deep .mat-snack-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

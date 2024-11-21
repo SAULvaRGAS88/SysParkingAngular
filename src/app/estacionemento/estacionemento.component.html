@@ -1,0 +1,74 @@
+<app-menu-header></app-menu-header>
+
+<div class="container my-4 text-light bg-dark p-4 rounded ">
+    <h1 class="text-center mb-4">Gerenciar Estacionamentos</h1>
+
+    <!-- Lista de estacionamentos -->
+    <h2 class="mb-3">Lista de Estacionamentos</h2>
+    <div class="container pb-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+            <div *ngFor="let estacionamento of estacionamentos" class="col">
+                <div class="card bg-dark text-white rounded p-3 border-secondary"
+                    (click)="selecionarEstacionamento(estacionamento)">
+                    <h5 class="card-title fw-bold mb-2">{{ estacionamento.nome }}</h5>
+                    <p class="card-text">Endereço: {{ estacionamento.endereco }}</p>
+                    <p class="card-text">Vagas Disponíveis: {{ estacionamento.numeroVagasDisponiveis }}</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <button class="btn btn-warning btn-sm z-index-1 position-relative"
+                            (click)="editarEstacionamento(estacionamento); $event.stopPropagation()">Editar</button>
+                        <button class="btn btn-danger btn-sm z-index-1 position-relative"
+                            (click)="deletarEstacionamento(estacionamento); $event.stopPropagation()">Deletar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulário para edição -->
+    <div *ngIf="editandoEstacionamento" class="border border-light p-3 rounded bg-secondary mb-2">
+        <h2 class="mb-3">Editar Estacionamento</h2>
+        <form (submit)="salvarEdicao()">
+            <div class="mb-3">
+                <label for="editNome" class="form-label">Nome:</label>
+                <input id="editNome" class="form-control" [(ngModel)]="editandoEstacionamento.nome" name="editNome"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label for="editEndereco" class="form-label">Endereço:</label>
+                <input id="editEndereco" class="form-control" [(ngModel)]="editandoEstacionamento.endereco"
+                    name="editEndereco" required />
+            </div>
+            <div class="mb-3">
+                <label for="editVagas" class="form-label">Número de Vagas Disponíveis:</label>
+                <input type="number" id="editVagas" class="form-control"
+                    [(ngModel)]="editandoEstacionamento.numeroVagasDisponiveis" name="editNumeroVaagasDisponiveis"
+                    required />
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="button" class="btn btn-secondary"
+                    (click)="editandoEstacionamento = null">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Formulário para adicionar novo estacionamento -->
+    <form (submit)="adicionarEstacionamento()" class="mb-4">
+        <h2 class="mb-3">Adicionar Estacionamento</h2>
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input id="nome" class="form-control" [(ngModel)]="novoEstacionamento.nome" name="nome" required />
+        </div>
+        <div class="mb-3">
+            <label for="endereco" class="form-label">Endereço:</label>
+            <input id="endereco" class="form-control" [(ngModel)]="novoEstacionamento.endereco" name="endereco"
+                required />
+        </div>
+        <div class="mb-3">
+            <label for="vagas" class="form-label">Número de Vagas Disponíveis:</label>
+            <input type="number" id="vagas" class="form-control" [(ngModel)]="novoEstacionamento.numeroVagasDisponiveis"
+                name="numeroVaagasDisponiveis" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+    </form>
+</div>
