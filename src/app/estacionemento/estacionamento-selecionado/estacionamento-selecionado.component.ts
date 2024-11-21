@@ -10,7 +10,7 @@ import { Estacionamento } from '../../models/estacionamento.model';
 })
 export class EstacionamentoSelecionadoComponent implements OnInit {
 
-  estacionamentos: Estacionamento[] = [];
+  estacionamento: Estacionamento[] = [];
   estacionamentoId: string | null = null;
   estacionamentoDetalhes: any = null;
 
@@ -35,7 +35,7 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
   async buscarEstacionamentoPorId(id: string): Promise<void> {
     try {
       this.estacionamentoDetalhes = await this.estacionamentoSelecionadoService.buscarEstacionamentoPorIdFirebase(id);
-      this.estacionamentos.push(this.estacionamentoDetalhes);
+      this.estacionamento.push(this.estacionamentoDetalhes);
       console.log('Detalhes do Estacionamento:', this.estacionamentoDetalhes);
     } catch (error) {
       console.error('Erro ao buscar detalhes do estacionamento:', error);

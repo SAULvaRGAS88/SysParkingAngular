@@ -8,8 +8,8 @@
     <div class="container pb-3">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <div *ngFor="let estacionamento of estacionamentos" class="col">
-                <div class="card bg-dark text-white rounded p-3 border-secondary"
-                    (click)="selecionarEstacionamento(estacionamento)">
+                <div class="card bg-dark text-white rounded p-3 border-secondary "
+                    (click)="selecionarEstacionamento(estacionamento)" style="cursor: pointer;">
                     <h5 class="card-title fw-bold mb-2">{{ estacionamento.nome }}</h5>
                     <p class="card-text">Endereço: {{ estacionamento.endereco }}</p>
                     <p class="card-text">Vagas Disponíveis: {{ estacionamento.numeroVagasDisponiveis }}</p>

@@ -1,4 +1,10 @@
 <app-menu-header></app-menu-header>
-<div *ngFor="let estacionamento of estacionamentos" class="col">
-    <p>Acessando estacionamento: {{ estacionamento?.nome }}</p>
+<div class="container my-4 text-light bg-dark p-4 rounded ">
+    <div *ngFor="let estacionamentoSelecionado of estacionamento" class="col">
+        <h2 class=" fw-bold mb-4 
+               text-center text-sm-center text-md-center text-lg-center 
+               fs-4 fs-sm-3 fs-md-2 fs-lg-1">
+            {{ estacionamentoSelecionado.nome }}
+        </h2>
+    </div>
 </div>

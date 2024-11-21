@@ -29,4 +29,12 @@ export class EstacionamentoSelecionadoService {
     }
   }
 
+  // Adicionar carro (estacionar) ao estacionamento selecionado
+
+  // Mostrar todos os carros estacionanados
+
+  // Atualizar carro
+
+  // Deletar carro (desestacionar) do estacionamento selecionado 
+
 }
