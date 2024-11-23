@@ -18,6 +18,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { EstacionamentoSelecionadoComponent } from './estacionemento/estacionamento-selecionado/estacionamento-selecionado.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { TabelaPrecoComponent } from './tabela-preco/tabela-preco.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     ColaboradoresComponent,
     NotaComponent,
     EstacionamentoSelecionadoComponent,
-    FilterPipe
+    FilterPipe,
+    TabelaPrecoComponent
   ],
   imports: [
     BrowserModule,

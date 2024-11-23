@@ -4,6 +4,7 @@ import { EstacionamentoSelecionadoService } from '../../services/estacionamento-
 import { Estacionamento } from '../../models/estacionamento.model';
 import { Carro } from '../../models/carro.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Recuperadata, Recuperahorario } from '../../components/utils/Recuperahorario';
 
 @Component({
   selector: 'app-estacionamento-selecionado',
@@ -19,7 +20,9 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
     marca: '',
     modelo: '',
     cor: '',
-    placa: ''
+    placa: '',
+    horaEntrada: Recuperahorario(),
+    dataEntrada: Recuperadata()
   }
   editandoCarro: Carro | null = null;
   abrirFormulario: boolean = false;
@@ -82,7 +85,9 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
         marca: '',
         modelo: '',
         cor: '',
-        placa: ''
+        placa: '',
+        horaEntrada: '',
+        dataEntrada: '',
       }
       this.abrirFormulario = false;
       console.log('Carro estacionado com sucesso!');
@@ -177,6 +182,11 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
         carro.placa.toLowerCase().includes(this.searchText.toLowerCase())
       );
     }
+  }
+
+  /**Metodo para direcionar para Tabela de Preços */
+  mostrarTabelaPrecos(): void {
+    this.router.navigate([`tabela-precos/${this.estacionamentoId}`]);
   }
 
 }

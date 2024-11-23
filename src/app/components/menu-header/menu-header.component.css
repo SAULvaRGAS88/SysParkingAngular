@@ -8,3 +8,39 @@
     font-weight: bold;
   }
   
+  /* Estilo da marca (navbar-brand) */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Estilo do nome "SysParking" */
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffcc00;
+}
+
+/* Estilo do horário */
+.logo-time {
+  font-size: 0.9rem;
+  color: #aaa;
+  font-weight: normal;
+  margin-top: 2px;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 1.2rem;
+  }
+
+  .logo-time {
+    font-size: 0.8rem;
+  }
+}

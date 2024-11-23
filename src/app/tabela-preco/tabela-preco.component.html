@@ -1,0 +1,54 @@
+<app-menu-header></app-menu-header>
+
+<div class="container my-4 text-light bg-dark p-4 rounded">
+    <h3 class="text-center mb-4">Tabela de Preços</h3>
+    <form class="row g-3">
+
+        <!-- Preço 15 Minutos -->
+        <div class="col-md-6">
+            <label for="preco15Min" class="form-label">Preço (15 Min)</label>
+            <input type="number" id="preco15Min" class="form-control" placeholder="Digite o preço para 15 minutos"
+                [(ngModel)]="novaTabelaPreco.preco15Min" name="preco15Min" required />
+        </div>
+
+        <!-- Preço 30 Minutos -->
+        <div class="col-md-6">
+            <label for="preco30Min" class="form-label">Preço (30 Min)</label>
+            <input type="number" id="preco30Min" class="form-control" placeholder="Digite o preço para 30 minutos"
+                [(ngModel)]="novaTabelaPreco.preco30Min" name="preco30Min" required>
+        </div>
+
+        <!-- Preço 1 Hora -->
+        <div class="col-md-6">
+            <label for="preco1Hora" class="form-label">Preço (1 Hora)</label>
+            <input type="number" id="preco1Hora" class="form-control" placeholder="Digite o preço para 1 hora"
+                [(ngModel)]="novaTabelaPreco.preco1Hora" name="preco1Hora" required>
+        </div>
+
+        <!-- Preço Diária -->
+        <div class="col-md-6">
+            <label for="precoDiaria" class="form-label">Preço (Diária)</label>
+            <input type="number" id="precoDiaria" class="form-control" placeholder="Digite o preço para diária"
+                [(ngModel)]="novaTabelaPreco.precoDiaria" name="precoDiaria" required>
+        </div>
+
+        <!-- Preço Pernoite -->
+        <div class="col-md-6">
+            <label for="precoPernoite" class="form-label">Preço (Pernoite)</label>
+            <input type="number" id="precoPernoite" class="form-control" placeholder="Digite o preço para pernoite"
+                [(ngModel)]="novaTabelaPreco.precoPernoite" name="precoPernoite" required>
+        </div>
+
+        <!-- Preço Mensal -->
+        <div class="col-md-6">
+            <label for="precoMensal" class="form-label">Preço (Mensal)</label>
+            <input type="number" id="precoMensal" class="form-control" placeholder="Digite o preço para mensal"
+                [(ngModel)]="novaTabelaPreco.precoMensal" name="precoMensal" required>
+        </div>
+
+        <!-- Botões -->
+        <div class="col-12 d-flex justify-content-center mt-4">
+            <button type="submit" class="btn btn-success me-2" (click)="salvarTabelaPreco()">Salvar</button>
+        </div>
+    </form>
+</div>

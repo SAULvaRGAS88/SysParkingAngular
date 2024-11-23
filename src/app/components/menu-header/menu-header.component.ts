@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import {Recuperahorario} from '../utils/Recuperahorario';
 import { Auth, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
@@ -9,8 +10,13 @@ import { Router } from '@angular/router';
 })
 export class MenuHeaderComponent {
   isAuth = false;
+  horaAtual: string = '';
+  gethoras = Recuperahorario
 
-  constructor(private auth: Auth, private router: Router) {
+  constructor(
+    private auth: Auth, private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {
 
     this.isAuth = !!localStorage.getItem('credential');
 
@@ -24,6 +30,11 @@ export class MenuHeaderComponent {
     });
   }
 
+  ngOnInit() {
+    this.atualizarHora();
+  }
+
+  /**Realiza o logout */
   realizarLogOut() {
     signOut(this.auth)
       .then(() => {
@@ -36,5 +47,15 @@ export class MenuHeaderComponent {
         console.error("Erro ao desconectar:", error);
         alert("Erro ao desconectar");
       });
+  }
+
+  /**Metodo para pegar a hora e ficar resnderizando sua mudança a cada segundo*/
+
+  atualizarHora() {
+    setInterval(() => {
+      this.horaAtual = this.gethoras();
+      this.cdr.detectChanges(); // Força a atualização
+    }, 1000);
+
   }
 }

@@ -1,24 +1,51 @@
 body {
-    background-color: #121212;
-    color: #ffffff;
-  }
-  
-  .btn {
-    font-weight: bold;
-  }
-  
-  h1, h2 {
-    color: #ffffff;
-  }
-  
-  .list-group-item-dark {
-    background-color: #1f1f1f;
-    border: none;
-  }
-  
-  .list-group-item-dark p {
-    margin: 0;
-  }
+  background-color: #121212;
+  color: #ffffff;
+}
 
-  
-  
+.btn {
+  font-weight: bold;
+}
+
+h1,
+h2 {
+  color: #ffffff;
+}
+
+.list-group-item-dark {
+  background-color: #1f1f1f;
+  border: none;
+}
+
+.list-group-item-dark p {
+  margin: 0;
+}
+
+p.card-text {
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-with-opacity {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-with-opacity::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../../../assets/carro.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.card-with-opacity .card-overlay {
+  position: relative;
+  z-index: 1;
+}

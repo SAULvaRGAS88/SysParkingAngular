@@ -7,6 +7,7 @@ import { ColaboradoresComponent } from './colaboradores/colaboradores.component'
 import { EstacionamentoComponent } from './estacionemento/estacionemento.component';
 import { EstacionamentoSelecionadoComponent } from './estacionemento/estacionamento-selecionado/estacionamento-selecionado.component';
 import { NotaComponent } from './nota/nota.component';
+import { TabelaPrecoComponent } from './tabela-preco/tabela-preco.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'estacionamento/:id', component: EstacionamentoSelecionadoComponent },
   { path: 'nota/:id', component: NotaComponent },
   { path: 'colaboradores', component: ColaboradoresComponent },
+  { path: 'tabela-precos/:id', component: TabelaPrecoComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

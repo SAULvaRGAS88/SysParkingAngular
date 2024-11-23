@@ -1,7 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- Título ou logo -->
-        <a class="navbar-brand" routerLink="/dashboard">SysParking</a>
+        <a class="navbar-brand logo" routerLink="/dashboard">
+            <span class="logo-text">SysParking</span>
+            <span class="logo-time">Horário: {{ gethoras() }}</span>
+        </a>
 
         <!-- Botão para dispositivos menores -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -25,7 +28,7 @@
                     <a class="nav-link" routerLink="/colaboradores">Colaboradores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-danger" (click)="realizarLogOut()">Logout
+                    <a class="nav-link text-danger" style="cursor: pointer;" (click)="realizarLogOut()">Logout
                     </a>
                 </li>
             </ul>

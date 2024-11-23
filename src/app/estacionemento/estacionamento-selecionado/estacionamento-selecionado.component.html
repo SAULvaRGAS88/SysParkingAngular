@@ -11,10 +11,18 @@
         </h2>
     </div>
 
-    <!-- Botão para mostrar ou ocultar o formulário -->
-    <button (click)="adicionarCarroForm()" class="btn btn-primary mb-3">
-        {{ abrirFormulario ? 'Ocultar Formulário' : 'Adicionar Carro' }}
-    </button>
+    <div class="d-flex flex-row align-items-center gap-3">
+        <!-- Botão para mostrar ou ocultar o formulário -->
+        <button (click)="adicionarCarroForm()" class="btn btn-primary mb-3">
+            {{ abrirFormulario ? 'Ocultar Formulário' : 'Adicionar Carro' }}
+        </button>
+
+        <!-- Botão para mostrar componente da Tabela de Preços -->
+        <button (click)="mostrarTabelaPrecos()" class="btn btn-primary mb-3">
+            Tabela de Preços 
+        </button>
+    </div>
+
 
     <!-- Formulário para adicionar novo carro -->
     <form *ngIf="abrirFormulario" (submit)="estacionarCarro()" class="mb-4">
@@ -54,14 +62,15 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <div *ngFor="let carro of filtrarCarros" class="col">
                 <!-- Detalhes do carro -->
-                <div class="card bg-dark text-white rounded p-3 border-secondary position-relative"
-                    (click)="selecionarCarro(carro)"
-                    style="background-image: url('../../../assets/carro.jpg'); background-size: cover; background-position: center; cursor: pointer;">
+                <div class="card bg-dark text-white rounded p-3 border-secondary position-relative card-with-opacity"
+                    (click)="selecionarCarro(carro)">
                     <div class="card-overlay position-relative p-3">
                         <p class="card-text fw-bold">Marca: {{ carro.marca }}</p>
                         <p class="card-text fw-bold">Modelo: {{ carro.modelo }}</p>
                         <p class="card-text fw-bold">Cor: {{ carro.cor }}</p>
                         <p class="card-text fw-bold">Placa: {{ carro.placa }}</p>
+                        <p class="card-text fw-bold">Entrada: {{ carro.horaEntrada }}</p>
+                        <p class="card-text fw-bold">Data: {{ carro.dataEntrada }}</p>
                         <div class="d-flex gap-3 mt-3">
                             <button class="btn btn-warning btn-sm z-index-1 position-relative"
                                 (click)="editarCarro(carro); $event.stopPropagation()">Editar</button>
@@ -70,6 +79,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -14,4 +14,24 @@
     color: #fff;
     border-color: #666;
   }
+  .container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  .login-card {
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7); /* Cor preta translúcida */
+    border-radius: 10px;
+  }
   
