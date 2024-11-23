@@ -1,10 +1,109 @@
 <app-menu-header></app-menu-header>
 <div class="container my-4 text-light bg-dark p-4 rounded ">
+
+    <!-- Nome do estacionamento -->
     <div *ngFor="let estacionamentoSelecionado of estacionamento" class="col">
         <h2 class=" fw-bold mb-4 
                text-center text-sm-center text-md-center text-lg-center 
                fs-4 fs-sm-3 fs-md-2 fs-lg-1">
-            {{ estacionamentoSelecionado.nome }}
+            {{ estacionamentoSelecionado.nome }} <br>
+            {{ estacionamentoSelecionado.endereco }}
         </h2>
     </div>
+
+    <!-- Botão para mostrar ou ocultar o formulário -->
+    <button (click)="adicionarCarroForm()" class="btn btn-primary mb-3">
+        {{ abrirFormulario ? 'Ocultar Formulário' : 'Adicionar Carro' }}
+    </button>
+
+    <!-- Formulário para adicionar novo carro -->
+    <form *ngIf="abrirFormulario" (submit)="estacionarCarro()" class="mb-4">
+        <h2 class="mb-3">Adicionar Carro</h2>
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca:</label>
+            <input id="marca" class="form-control" [(ngModel)]="novoCarro.marca" name="marca" required />
+        </div>
+        <div class="mb-3">
+            <label for="modelo" class="form-label">Modelo:</label>
+            <input id="modelo" class="form-control" [(ngModel)]="novoCarro.modelo" name="modelo" required />
+        </div>
+        <div class="mb-3">
+            <label for="cor" class="form-label">Cor:</label>
+            <input id="cor" class="form-control" [(ngModel)]="novoCarro.cor" name="cor" required />
+        </div>
+        <div class="mb-3">
+            <label for="placa" class="form-label">Placa:</label>
+            <input id="placa" class="form-control" [(ngModel)]="novoCarro.placa" name="placa" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+    </form>
+
+    <!-- Lista de Carros -->
+    <h4 class="mb-3">Carros no Estacionamento {{this.carros.length }}</h4>
+    <h5>Número de vagas: {{ vagasRestantes() }}</h5>
+
+    <!-- Input para filtrar busca de carros -->
+    <input type="text" [(ngModel)]="searchText" placeholder="Buscar por modelo ou marca" class="form-control mb-3">
+
+    <!-- Lista de carros filtrados -->
+    <div *ngIf="carros.length === 0">
+        <p class="text-center alert alert-info">Sem carros no estacionamento</p>
+    </div>
+
+    <div class="container pb-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+            <div *ngFor="let carro of filtrarCarros" class="col">
+                <!-- Detalhes do carro -->
+                <div class="card bg-dark text-white rounded p-3 border-secondary position-relative"
+                    (click)="selecionarCarro(carro)"
+                    style="background-image: url('../../../assets/carro.jpg'); background-size: cover; background-position: center; cursor: pointer;">
+                    <div class="card-overlay position-relative p-3">
+                        <p class="card-text fw-bold">Marca: {{ carro.marca }}</p>
+                        <p class="card-text fw-bold">Modelo: {{ carro.modelo }}</p>
+                        <p class="card-text fw-bold">Cor: {{ carro.cor }}</p>
+                        <p class="card-text fw-bold">Placa: {{ carro.placa }}</p>
+                        <div class="d-flex gap-3 mt-3">
+                            <button class="btn btn-warning btn-sm z-index-1 position-relative"
+                                (click)="editarCarro(carro); $event.stopPropagation()">Editar</button>
+                            <button class="btn btn-danger btn-sm z-index-1 position-relative"
+                                (click)="deletarCarroEstacionado(carro); $event.stopPropagation()">Deletar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Formulário para edição -->
+    <div *ngIf="editandoCarro" class="border border-light p-3 rounded bg-secondary mb-2">
+        <h2 class="mb-3">Editar Carro</h2>
+        <form (submit)="salvarCarro()">
+            <div class="mb-3">
+                <label for="editMarca" class="form-label">Marca:</label>
+                <input id="editMarca" class="form-control" [(ngModel)]="editandoCarro.marca" name="editMarca"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label for="editModelo" class="form-label">Modelo:</label>
+                <input id="editModelo" class="form-control" [(ngModel)]="editandoCarro.modelo" name="editModelo"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label for="editCor" class="form-label">Cor:</label>
+                <input id="editCor" class="form-control" [(ngModel)]="editandoCarro.cor" name="editCor" required />
+            </div>
+            <div class="mb-3">
+                <label for="editPlaca" class="form-label">Placa:</label>
+                <input id="editPlaca" class="form-control" [(ngModel)]="editandoCarro.placa" name="editPlaca"
+                    required />
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="button" class="btn btn-secondary" (click)="editandoCarro = null">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
 </div>

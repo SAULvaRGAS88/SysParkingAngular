@@ -17,6 +17,7 @@ import { EstacionamentoComponent } from './estacionemento/estacionemento.compone
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { EstacionamentoSelecionadoComponent } from './estacionemento/estacionamento-selecionado/estacionamento-selecionado.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EstacionamentoSelecionadoComponent } from './estacionemento/estacioname
     EstacionamentoComponent,
     ColaboradoresComponent,
     NotaComponent,
-    EstacionamentoSelecionadoComponent
+    EstacionamentoSelecionadoComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

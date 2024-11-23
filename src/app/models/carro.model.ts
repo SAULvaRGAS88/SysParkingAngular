@@ -1,7 +1,5 @@
-import { Nota } from "./nota.model";
-
 export interface Carro {
-    id: number;
+    id?: string;
     marca: string;
     modelo: string;
     cor: string;
