@@ -1,0 +1,65 @@
+.my-custom-table {
+    margin: 20px 0;
+    /* Espaçamento externo */
+}
+
+.table {
+    border: 1px solid #dee2e6;
+    /* Borda na tabela */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.thead-dark {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.table td,
+.table th {
+    text-align: center;
+    padding: 12px;
+}
+
+/* Estilo para o grid em dispositivos menores */
+.price-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Duas colunas no grid */
+    gap: 8px;
+    padding: 16px;
+    background-color: #f8f9fa;
+    /* Fundo claro */
+    border: 1px solid #dee2e6;
+    /* Borda */
+    border-radius: 8px;
+}
+
+.price-item {
+    display: contents;
+}
+
+.price-label {
+    font-weight: bold;
+    color: #495057;
+    /* Texto escuro */
+}
+
+.price-value {
+    color: #212529;
+    /* Texto principal */
+    text-align: right;
+}
+
+/* Adaptação para telas ainda menores */
+@media (max-width: 576px) {
+    .price-grid {
+        grid-template-columns: 1fr;
+        /* Apenas uma coluna */
+    }
+
+    .price-value {
+        text-align: left;
+        /* Ajusta alinhamento */
+    }
+}
