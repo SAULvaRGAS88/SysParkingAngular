@@ -43,6 +43,22 @@
             <label for="placa" class="form-label">Placa:</label>
             <input id="placa" class="form-control" [(ngModel)]="novoCarro.placa" name="placa" required />
         </div>
+        <div class="mb-3">
+            <label for="tipoVeiculo" class="form-label">Tipo de Servico:</label>
+            <select
+                id="tipoVeiculo"
+                class="form-select"
+                [(ngModel)]="novoCarro.tipoVeiculo"
+                name="tipoVeiculo"
+                required
+            >
+                <option value="" disabled selected>Selecione...</option>
+                <option value="Avulso">Avulso</option>
+                <option value="Diaria">Diária</option>
+                <option value="Pernoite">Pernoite</option>
+                <option value="Mensalista">Mensalista</option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary w-100">Adicionar</button>
     </form>
 
@@ -71,6 +87,7 @@
                         <p class="card-text fw-bold">Placa: {{ carro.placa }}</p>
                         <p class="card-text fw-bold">Entrada: {{ carro.horaEntrada }}</p>
                         <p class="card-text fw-bold">Data: {{ carro.dataEntrada }}</p>
+                        <p class="card-text fw-bold">Tipo de Servico: {{ carro.tipoVeiculo }}</p>
                         <div class="d-flex gap-3 mt-3">
                             <button class="btn btn-warning btn-sm z-index-1 position-relative"
                                 (click)="editarCarro(carro); $event.stopPropagation()">Editar</button>
@@ -83,8 +100,6 @@
             </div>
         </div>
     </div>
-
-
 
     <!-- Formulário para edição -->
     <div *ngIf="editandoCarro" class="border border-light p-3 rounded bg-secondary mb-2">

@@ -14,7 +14,8 @@ export class MenuHeaderComponent {
   gethoras = Recuperahorario
 
   constructor(
-    private auth: Auth, private router: Router,
+    private auth: Auth, 
+    private router: Router,
     private cdr: ChangeDetectorRef
   ) {
 

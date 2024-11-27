@@ -4,6 +4,7 @@ export interface Carro {
     modelo: string;
     cor: string;
     placa: string;
+    tipoVeiculo: string;
     horaEntrada?: string;
     dataEntrada?: string;
 }

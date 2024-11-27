@@ -21,6 +21,7 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
     modelo: '',
     cor: '',
     placa: '',
+    tipoVeiculo: '',
     horaEntrada: Recuperahorario(),
     dataEntrada: Recuperadata()
   }
@@ -86,6 +87,7 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
         modelo: '',
         cor: '',
         placa: '',
+        tipoVeiculo: '',
         horaEntrada: '',
         dataEntrada: '',
       }
