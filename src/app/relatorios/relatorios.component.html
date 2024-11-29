@@ -1,2 +1,7 @@
 <app-menu-header></app-menu-header>
-<h3 class="text-center mb-4">Relatorios</h3>
+<div class="container my-4 text-light bg-dark p-4 rounded">
+    <h1>Relatórios</h1>
+    <p>Total Arrecadado: {{ totalArrecadado | currency:'BRL' }}</p>
+    <p>Total de Veículos: {{ totalVeiculos }}</p>
+    <p>Tempo Total de Permanência: {{ totalPermanencia }}</p>
+</div>

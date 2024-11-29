@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import {Recuperahorario} from '../utils/Recuperahorario';
 import { Auth, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { NotaService } from '../../services/nota.service';
 
 @Component({
   selector: 'app-menu-header',
@@ -12,11 +13,13 @@ export class MenuHeaderComponent {
   isAuth = false;
   horaAtual: string = '';
   gethoras = Recuperahorario
+  nomeUsuarioHeader: string = '';
 
   constructor(
     private auth: Auth, 
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private notaService: NotaService
   ) {
 
     this.isAuth = !!localStorage.getItem('credential');
@@ -33,6 +36,7 @@ export class MenuHeaderComponent {
 
   ngOnInit() {
     this.atualizarHora();
+    this.nomeUsuario();
   }
 
   /**Realiza o logout */
@@ -57,6 +61,19 @@ export class MenuHeaderComponent {
       this.horaAtual = this.gethoras();
       this.cdr.detectChanges(); // Força a atualização
     }, 1000);
-
   }
+
+  async nomeUsuario() {
+    try {
+      // Aguarda a resolução da Promise para pegar o nome do usuário
+      const nome = await this.notaService.pegarNomeUsuario();
+      console.log('Nome do usuário:', nome);
+      this.nomeUsuarioHeader = nome;
+      return nome;
+    } catch (error) {
+      console.error('Erro ao obter o nome do usuário:', error);
+      return 'Erro ao obter nome';  // Retorna uma mensagem de erro, se necessário
+    }
+  }
+  
 }

@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class NotaService {
 
+  usuarioNome: string | null = null;
+
   constructor(
     private firestore: Firestore,
     private snackBar: MatSnackBar,
@@ -38,43 +40,72 @@ export class NotaService {
     }
   }
 
-  //**Metodo para Salvar dados no firebase para o relatório (id do estacionamento, nome do veiculo, hora de entrada, hora de saida, valor pago, tempo de permanência e data) */
   async salvarDadosRelatorioFirebase(
     estacionamentoId: string,
     carro: Carro,
     valorPago: number,
     tempoPermanencia: string,
-    formaPagamento: string
+    formaPagamento: string = '',
+    erro: string | null = null
   ): Promise<void> {
-    const relatorioCollections = collection(this.firestore, 'relatorios');
 
-    // Criar o objeto do relatório usando os atributos da instância `carro`
-    const relatorio = {
-      estacionamentoId,
-      nomeVeiculo: `${carro.marca} ${carro.modelo}`,
-      placa: carro.placa,
-      cor: carro.cor,
-      tipoVeiculo: carro.tipoVeiculo,
-      horaEntrada: carro.horaEntrada,
-      dataEntrada: carro.dataEntrada,
-      valorPago,
-      tempoPermanencia,
-      formaPagamento
-    };
-    this.deletarCarro(carro, estacionamentoId);
+    if (formaPagamento === '') {
+      this.snackBar.open('Selecione uma forma de pagamento', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
 
-    try {
-      // Salvar o objeto no Firebase
-      await addDoc(relatorioCollections, relatorio);
-      console.log('Dados salvos para o relatório:', relatorio);
-    } catch (error) {
-      console.error('Erro ao salvar os dados no relatório:', error);
+      erro = 'Forma de pagamento não selecionada';
+      return;  // Interrompe a execução caso não seja selecionada uma forma de pagamento
+    } else {
+      // Espera a conclusão da deleção do carro antes de continuar
+      const deletado = await this.deletarCarro(carro, estacionamentoId);  // Verifica se a deleção foi bem-sucedida
+
+      if (!deletado) {
+        console.log('A deleção do carro foi cancelada ou falhou!');
+        return
+      } else {
+        // Espera o nome do usuário
+        const usuarioNome = await this.pegarNomeUsuario();
+
+        const relatorioCollections = collection(this.firestore, 'relatorios');
+
+        // Recuperar o usuário
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const userId = user.uid || null;
+        const useremail = user.email || 'Usuário não identificado';
+
+        // Criar o objeto do relatório
+        const relatorio = {
+          estacionamentoId,
+          nomeVeiculo: `${carro.marca} ${carro.modelo}`,
+          placa: carro.placa,
+          cor: carro.cor,
+          tipoVeiculo: carro.tipoVeiculo,
+          horaEntrada: carro.horaEntrada,
+          dataEntrada: carro.dataEntrada,
+          valorPago,
+          tempoPermanencia,
+          formaPagamento,
+          usuarioId: userId,
+          usuarioNome: useremail,
+          userNome: usuarioNome
+        };
+
+        try {
+          // Salvar no Firestore
+          await addDoc(relatorioCollections, relatorio);
+          console.log('Dados salvos para o relatório:', relatorio);
+        } catch (error) {
+          console.error('Erro ao salvar os dados no relatório:', error);
+        }
+      }
     }
   }
 
-  
   // Deletar carro (desestacionar) do estacionamento selecionado
-  async deletarCarro(carro: Carro, estacionamentoId: string): Promise<void> {
+  async deletarCarro(carro: Carro, estacionamentoId: string): Promise<boolean> {
     const result = await Swal.fire({
       title: 'Finalizar Serviço',
       text: `Tem certeza que deseja finalizar o Serviço com placa: ${carro.placa}?`,
@@ -94,6 +125,7 @@ export class NotaService {
           verticalPosition: 'top',
         });
         this.router.navigate(['/estacionamento']);
+        return true; // Retorna true para indicar que o carro foi deletado com sucesso
       } catch (error: any) {
         console.error('Erro ao Finalizar Serviço:', error);
         this.snackBar.open(`Erro ao Finalizar Serviço: ${error.message || 'Erro desconhecido'}`, 'Fechar', {
@@ -101,15 +133,51 @@ export class NotaService {
           horizontalPosition: 'center',
           verticalPosition: 'top',
         });
+        return false; // Retorna false em caso de erro
       }
     } else {
       console.log('Serviço cancelado pelo usuário.');
-      this.snackBar.open('Serviço cancelada pelo usuário.', 'Fechar', {
+      this.snackBar.open('Serviço cancelado pelo usuário.', 'Fechar', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
+      return false; // Retorna false caso o usuário cancele a operação
     }
+  }
 
+
+  // Método para obter o nome do usuário
+  async pegarNomeUsuario(): Promise<string> {
+    try {
+      // Recuperar o usuário do localStorage
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const userId = user.uid;
+
+      // Verifica se o userId existe
+      if (!userId) {
+        console.warn('Nenhum userId encontrado no localStorage.');
+        return 'Usuário não identificado'; // Retorna um nome padrão
+      }
+
+      // Busca o documento do Firestore
+      const docRef = doc(this.firestore, `users/${userId}`);
+      const docSnap = await getDoc(docRef);
+
+      // Verifica se o documento existe
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        const usuarioNome = userData?.['nome'] || 'Usuário não identificado'; // Valor padrão
+        console.log('Nome do usuário:', usuarioNome);
+        this.usuarioNome = usuarioNome; // Atualiza o nome na instância, se necessário
+        return usuarioNome; // Retorna o nome do usuário
+      } else {
+        console.warn(`Usuário com ID ${userId} não encontrado.`);
+        return 'Usuário não identificado'; // Retorna um nome padrão se não encontrar o documento
+      }
+    } catch (error) {
+      console.error('Erro ao buscar nome do usuário:', error);
+      return 'Usuário não identificado'; // Retorna um nome padrão em caso de erro
+    }
   }
 }

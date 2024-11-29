@@ -13,25 +13,33 @@
         </button>
 
         <!-- Links do menu -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" routerLink="/dashboard">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/estacionamento">Estacionamentos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/relatorios">Relatórios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/colaboradores">Colaboradores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger" style="cursor: pointer;" (click)="realizarLogOut()">Logout
-                    </a>
-                </li>
-            </ul>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <div class="d-flex justify-content-between w-100">
+                <!-- Lista de links -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" routerLink="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/estacionamento">Estacionamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/relatorios">Relatórios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/colaboradores">Colaboradores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" style="cursor: pointer;" (click)="realizarLogOut()">Logout</a>
+                    </li>
+                </ul>
+
+                <!-- Nome do usuário (responsivo) -->
+                <span class="navbar-text text-white ms-3 d-none d-md-inline">
+                    Usuário: {{ nomeUsuarioHeader }}
+                </span>
+            </div>
         </div>
+
     </div>
 </nav>
