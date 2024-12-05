@@ -1,4 +1,28 @@
-# SysParking
+# **SysParking**
+
+Gerencie estacionamentos de forma prática e eficiente com o **SysParking**, uma solução desenvolvida com Angular para simplificar o controle de vagas, usuários e tabelas de preços.
+
+---
+
+## **Deploy Online**
+Acesse a versão publicada do sistema clicando no link abaixo:  
+[**SysParking Angular → 🚗🚙🚗**](https://sys-parking-angular.firebaseapp.com/login)
+
+---
+
+## **Como acessar o ambiente de desenvolvimento**
+
+### **Pré-requisitos**
+1. **Node.js**: Certifique-se de que a versão mais recente do Node.js está instalada em sua máquina.  
+2. **Angular CLI**: Instale o Angular CLI globalmente:  
+   ```bash
+   npm install -g @angular/cli
+3. ** Atualize as dependências:
+    ```bash
+   npm install
+4. ** Inicie o projeto:
+    ```bash
+   ng serve
 
 ## Introdução
 Um empresário adquiriu recentemente uma rede de estacionamentos que operava com um sistema manual, no qual as entradas e saídas de veículos eram registradas em papel, sem controle integrado com os pagamentos. Essa gestão manual resultava em ineficiências e dificuldades no monitoramento financeiro e operacional dos estacionamentos.
