@@ -20,10 +20,10 @@ Acesse a versão publicada do sistema clicando no link abaixo:
 2. **Angular CLI**: Instale o Angular CLI globalmente:  
    ```bash
    npm install -g @angular/cli
-3. ** Atualize as dependências:
+3. **Atualize as dependências:**
     ```bash
    npm install
-4. ** Inicie o projeto:
+4. **Inicie o projeto:**
     ```bash
    ng serve
 
