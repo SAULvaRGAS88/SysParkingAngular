@@ -5,6 +5,7 @@ import { Estacionamento } from '../../models/estacionamento.model';
 import { Carro } from '../../models/carro.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Recuperadata, Recuperahorario } from '../../components/utils/Recuperahorario';
+import { NotaService } from '../../services/nota.service';
 
 @Component({
   selector: 'app-estacionamento-selecionado',
@@ -30,17 +31,19 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
   carros: Carro[] = [];
   carrosFiltrados: Carro[] = [];
   searchText: string = '';
+  usuarioAutorizado: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private estacionamentoSelecionadoService: EstacionamentoSelecionadoService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private notaService: NotaService
   ) { }
 
   ngOnInit() {
     this.estacionamentoId = this.route.snapshot.paramMap.get('id');
-
+    this.pegarTipoUsuario();
     this.carrosFiltrados = [...this.carros];
 
     if (this.estacionamentoId) {
@@ -189,6 +192,18 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
   /**Metodo para direcionar para Tabela de Preços */
   mostrarTabelaPrecos(): void {
     this.router.navigate([`tabela-precos/${this.estacionamentoId}`]);
+  }
+
+  async pegarTipoUsuario() {
+    try {
+      const tipoUsuario = await this.notaService.pegarNomeUsuario();
+      console.log('tipoUsuario:', tipoUsuario);
+      this.usuarioAutorizado = tipoUsuario;
+      return tipoUsuario;
+    } catch (error) {
+      console.error('Erro ao obter o nome do usuário:', error);
+      return 'Erro ao obter nome';
+    }
   }
 
 }

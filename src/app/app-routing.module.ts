@@ -8,16 +8,18 @@ import { EstacionamentoComponent } from './estacionemento/estacionemento.compone
 import { EstacionamentoSelecionadoComponent } from './estacionemento/estacionamento-selecionado/estacionamento-selecionado.component';
 import { NotaComponent } from './nota/nota.component';
 import { TabelaPrecoComponent } from './tabela-preco/tabela-preco.component';
+import { AuthGuard } from './auth.guard';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'relatorios', component: RelatoriosComponent },
-  { path: 'estacionamento', component: EstacionamentoComponent },
-  { path: 'estacionamento/:id', component: EstacionamentoSelecionadoComponent },
-  { path: 'nota/:id', component: NotaComponent },
-  { path: 'colaboradores', component: ColaboradoresComponent },
-  { path: 'tabela-precos/:id', component: TabelaPrecoComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
+  { path: 'relatorios', component: RelatoriosComponent, canActivate: [AuthGuardService] },
+  { path: 'estacionamento', component: EstacionamentoComponent, canActivate: [AuthGuardService] },
+  { path: 'estacionamento/:id', component: EstacionamentoSelecionadoComponent,},
+  { path: 'nota/:id', component: NotaComponent},
+  { path: 'colaboradores', component: ColaboradoresComponent, canActivate: [AuthGuardService] },
+  { path: 'tabela-precos/:id', component: TabelaPrecoComponent, canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

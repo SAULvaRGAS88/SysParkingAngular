@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import {Recuperahorario} from '../utils/Recuperahorario';
+import { Recuperahorario } from '../utils/Recuperahorario';
 import { Auth, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { NotaService } from '../../services/nota.service';
@@ -14,9 +14,10 @@ export class MenuHeaderComponent {
   horaAtual: string = '';
   gethoras = Recuperahorario
   nomeUsuarioHeader: string = '';
+  usuarioAutorizado: string = '';
 
   constructor(
-    private auth: Auth, 
+    private auth: Auth,
     private router: Router,
     private cdr: ChangeDetectorRef,
     private notaService: NotaService
@@ -65,15 +66,21 @@ export class MenuHeaderComponent {
 
   async nomeUsuario() {
     try {
-      // Aguarda a resolução da Promise para pegar o nome do usuário
-      const nome = await this.notaService.pegarNomeUsuario();
-      console.log('Nome do usuário:', nome);
-      this.nomeUsuarioHeader = nome;
-      return nome;
+      
+      const { usuarioNome, tipoUsuario } = await this.notaService.pegarNomeUsuario();
+      
+      this.nomeUsuarioHeader = usuarioNome;
+      this.usuarioAutorizado = tipoUsuario;
+  
+      console.log('Nome do usuário:', usuarioNome);
+      console.log('Tipo de usuário:', tipoUsuario);
+  
+      return { usuarioNome, tipoUsuario };
     } catch (error) {
       console.error('Erro ao obter o nome do usuário:', error);
-      return 'Erro ao obter nome';  // Retorna uma mensagem de erro, se necessário
+      return { usuarioNome: 'Erro ao obter nome', tipoUsuario: 'Erro' }; 
     }
   }
   
+
 }

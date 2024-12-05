@@ -120,10 +120,16 @@ export class ColaboradoresComponent {
 
   }
 
-  deletarColaborador(colaborador: any) {
-    console.log('Deletar colaborador');
+  deletarColaborador(colaborador: Usuario) {
+    this.colaboradorService.deleteColaboradorFirestore(colaborador)
+      .then(() => {
+        console.log('Colaborador deletado com sucesso!');
+        this.buscarColaboradores();
+      })
+      .catch((error: any) => {
+        console.error('Erro ao deletar colaborador:', error);
+      });
   }
-
 
 
 }

@@ -1,2 +1,41 @@
 <app-menu-header></app-menu-header>
-<h3 class="text-center mb-4">Dashboard</h3>
+
+<div class="container my-4 text-light bg-dark p-4 rounded">
+    <h3 class="text-center mb-4">Dashboard</h3>
+
+    <!-- Grid para os 3 cards -->
+    <div class="row justify-content-center">
+        <!-- Card 1 - Estacionamentos -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-primary text-white">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="card-title text-center">Estacionamentos</h5>
+                    <p class="card-text text-center">Veja os estacionamentos disponíveis.</p>
+                    <a class="btn btn-light mt-3" routerLink="/estacionamento">Ir para Estacionamentos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 - Relatórios -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-success text-white">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="card-title text-center">Relatórios</h5>
+                    <p class="card-text text-center">Acesse os relatórios do sistema.</p>
+                    <a routerLink="/relatorios" class="btn btn-light mt-3">Ir para Relatórios</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 - Colaboradores -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-warning text-dark">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="card-title text-center">Colaboradores</h5>
+                    <p class="card-text text-center">Veja os colaboradores do sistema.</p>
+                    <a routerLink="/colaboradores" class="btn btn-light mt-3">Ir para Colaboradores</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,14 +21,11 @@ export class NotaService {
   // Buscar carro por ID
   async buscarCarroPorIdFirebase(carroId: string, estacionamentoId: string): Promise<any> {
     try {
-      // Referência ao documento
       const docRef = doc(this.firestore, `estacionamentos/${estacionamentoId}/carros/${carroId}`);
       console.log("docRef", docRef);
-      // Obter dados do documento
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        // Retorna os dados junto com o ID do documento
         return { id: docSnap.id, ...docSnap.data() } as Carro;
       } else {
         console.warn(`Carro com ID ${carroId} não encontrado.`);
@@ -57,26 +54,24 @@ export class NotaService {
       });
 
       erro = 'Forma de pagamento não selecionada';
-      return;  // Interrompe a execução caso não seja selecionada uma forma de pagamento
+      return;
     } else {
-      // Espera a conclusão da deleção do carro antes de continuar
-      const deletado = await this.deletarCarro(carro, estacionamentoId);  // Verifica se a deleção foi bem-sucedida
+      const deletado = await this.deletarCarro(carro, estacionamentoId);
 
       if (!deletado) {
         console.log('A deleção do carro foi cancelada ou falhou!');
         return
       } else {
-        // Espera o nome do usuário
         const usuarioNome = await this.pegarNomeUsuario();
 
         const relatorioCollections = collection(this.firestore, 'relatorios');
 
-        // Recuperar o usuário
+
         const user = JSON.parse(localStorage.getItem('user') || '{}');
         const userId = user.uid || null;
         const useremail = user.email || 'Usuário não identificado';
 
-        // Criar o objeto do relatório
+
         const relatorio = {
           estacionamentoId,
           nomeVeiculo: `${carro.marca} ${carro.modelo}`,
@@ -94,7 +89,6 @@ export class NotaService {
         };
 
         try {
-          // Salvar no Firestore
           await addDoc(relatorioCollections, relatorio);
           console.log('Dados salvos para o relatório:', relatorio);
         } catch (error) {
@@ -104,7 +98,6 @@ export class NotaService {
     }
   }
 
-  // Deletar carro (desestacionar) do estacionamento selecionado
   async deletarCarro(carro: Carro, estacionamentoId: string): Promise<boolean> {
     const result = await Swal.fire({
       title: 'Finalizar Serviço',
@@ -124,8 +117,8 @@ export class NotaService {
           horizontalPosition: 'center',
           verticalPosition: 'top',
         });
-        this.router.navigate(['/estacionamento']);
-        return true; // Retorna true para indicar que o carro foi deletado com sucesso
+        this.router.navigate([`/estacionamento/${estacionamentoId}`]);
+        return true;
       } catch (error: any) {
         console.error('Erro ao Finalizar Serviço:', error);
         this.snackBar.open(`Erro ao Finalizar Serviço: ${error.message || 'Erro desconhecido'}`, 'Fechar', {
@@ -133,7 +126,7 @@ export class NotaService {
           horizontalPosition: 'center',
           verticalPosition: 'top',
         });
-        return false; // Retorna false em caso de erro
+        return false;
       }
     } else {
       console.log('Serviço cancelado pelo usuário.');
@@ -142,42 +135,36 @@ export class NotaService {
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
-      return false; // Retorna false caso o usuário cancele a operação
+      return false;
     }
   }
 
-
-  // Método para obter o nome do usuário
-  async pegarNomeUsuario(): Promise<string> {
+  // Método para obter o nome do usuário e o tipo
+  async pegarNomeUsuario(): Promise<any> {
     try {
-      // Recuperar o usuário do localStorage
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const user = JSON.parse(localStorage.getItem('credential') || '{}');
       const userId = user.uid;
 
-      // Verifica se o userId existe
       if (!userId) {
         console.warn('Nenhum userId encontrado no localStorage.');
-        return 'Usuário não identificado'; // Retorna um nome padrão
+        return { usuarioNome: 'Usuário não identificado', tipoUsuario: 'Usuário' };
       }
 
-      // Busca o documento do Firestore
       const docRef = doc(this.firestore, `users/${userId}`);
       const docSnap = await getDoc(docRef);
 
-      // Verifica se o documento existe
       if (docSnap.exists()) {
         const userData = docSnap.data();
-        const usuarioNome = userData?.['nome'] || 'Usuário não identificado'; // Valor padrão
-        console.log('Nome do usuário:', usuarioNome);
-        this.usuarioNome = usuarioNome; // Atualiza o nome na instância, se necessário
-        return usuarioNome; // Retorna o nome do usuário
+        const usuarioNome = userData?.['nome'] || 'Colaborador';
+        const tipoUsuario = userData?.['tipoUsuario'];
+        return { usuarioNome, tipoUsuario };
       } else {
-        console.warn(`Usuário com ID ${userId} não encontrado.`);
-        return 'Usuário não identificado'; // Retorna um nome padrão se não encontrar o documento
+        return { usuarioNome: 'Colaborador', tipoUsuario: 'Usuário' };
       }
     } catch (error) {
       console.error('Erro ao buscar nome do usuário:', error);
-      return 'Usuário não identificado'; // Retorna um nome padrão em caso de erro
+      return { usuarioNome: 'Usuário não identificado', tipoUsuario: 'Usuário' };
     }
   }
+
 }

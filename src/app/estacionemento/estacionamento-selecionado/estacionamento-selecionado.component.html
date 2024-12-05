@@ -18,7 +18,7 @@
         </button>
 
         <!-- Botão para mostrar componente da Tabela de Preços -->
-        <button (click)="mostrarTabelaPrecos()" class="btn btn-primary mb-3">
+        <button *ngIf="usuarioAutorizado !== 'Usuário'" (click)="mostrarTabelaPrecos()" class="btn btn-primary mb-3">
             Tabela de Preços
         </button>
     </div>

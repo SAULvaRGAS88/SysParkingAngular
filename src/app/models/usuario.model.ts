@@ -6,4 +6,6 @@ export interface Usuario {
     senha: string;
     email: string;
     idEstacionamento?: string;
+    tipoUsuario?: string;
+    uid?: string;
 }
