@@ -31,7 +31,7 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
   carros: Carro[] = [];
   carrosFiltrados: Carro[] = [];
   searchText: string = '';
-  usuarioAutorizado: string = '';
+  usuarioAutorizado: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +51,9 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
       this.buscarCarrosEstacionados();
     }
   }
+
+  tipoUsuario$: Promise<string> = this.notaService.pegarNomeUsuario();
+
 
   //Metodo para contabilizar o numero de vagas restantes
   vagasRestantes(): number {
@@ -195,15 +198,17 @@ export class EstacionamentoSelecionadoComponent implements OnInit {
   }
 
   async pegarTipoUsuario() {
-    try {
-      const tipoUsuario = await this.notaService.pegarNomeUsuario();
-      console.log('tipoUsuario:', tipoUsuario);
-      this.usuarioAutorizado = tipoUsuario;
-      return tipoUsuario;
-    } catch (error) {
-      console.error('Erro ao obter o nome do usuário:', error);
-      return 'Erro ao obter nome';
-    }
+    const { usuarioNome, tipoUsuario } = await this.notaService.pegarNomeUsuario();
+
+    this.usuarioAutorizado = tipoUsuario;
+
+    console.log('Nome do usuário:', usuarioNome);
+    console.log('Tipo de usuário:', tipoUsuario);
+
+    return { usuarioNome, tipoUsuario };
+  } catch(error: any) {
+    console.error('Erro ao obter o nome do usuário:', error);
+    return { usuarioNome: 'Erro ao obter nome', tipoUsuario: 'Erro' };
   }
 
 }

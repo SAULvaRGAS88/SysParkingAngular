@@ -3,34 +3,31 @@
     <h1 class="text-center mb-4">Colaboradores</h1>
 
     <!-- Lista de colaboradores -->
-    <h2 class="mb-3 text-center">Lista de Colaboradores</h2>
-    <div class="container pb-3">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-            <div *ngFor="let colaborador of listarColaboradores" class="col">
-                <div class="card bg-dark text-white rounded p-3 border-secondary d-flex flex-column h-100"
-                    style="min-width: 250px;">
-                    <h5 class="card-title fw-bold mb-2 text-center ">{{ colaborador.nome }}</h5>
-                    <p class="card-subtitle mb-2 text-light text-truncate"> Nome Estacionamento: </p>
-                    <p>{{ colaborador.nomeEstacionamento }}</p>
-                    <p class="card-text mb-1 text-truncate">E-mail:</p>
-                    <p>{{ colaborador.email }}</p>
-                    <p class="card-text mb-1 text-truncate">Telefone: </p>
-                    <p>{{ colaborador.telefone }}</p>
-                    <p class="card-text mb-1 text-truncate">Endereço: </p>
-                    <p>{{ colaborador.endereco }}</p>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div *ngFor="let colaborador of listarColaboradores" class="col d-flex">
+            <div class="card bg-dark text-white rounded p-3 border-secondary d-flex flex-column h-100">
+                <h5 class="card-title fw-bold mb-2 text-center">{{ colaborador.nome }}</h5>
+                <p class="card-subtitle mb-2 text-light">Nome Estacionamento:</p>
+                <p>{{ colaborador.nomeEstacionamento }}</p>
+                <p class="card-text mb-1">E-mail:</p>
+                <p>{{ colaborador.email }}</p>
+                <p class="card-text mb-1">Telefone:</p>
+                <p>{{ colaborador.telefone }}</p>
+                <p class="card-text mb-1">Endereço:</p>
+                <p>{{ colaborador.endereco }}</p>
 
-                    <div class="mt-auto d-flex gap-2">
-                        <button class="btn btn-warning btn-sm flex-grow-1" (click)="editarColaborador(colaborador)">
-                            Editar
-                        </button>
-                        <button class="btn btn-danger btn-sm flex-grow-1" (click)="deletarColaborador(colaborador)">
-                            Deletar
-                        </button>
-                    </div>
+                <div class="mt-auto d-flex gap-2">
+                    <button class="btn btn-warning btn-sm flex-grow-1" (click)="editarColaborador(colaborador)">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm flex-grow-1" (click)="deletarColaborador(colaborador)">
+                        Deletar
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <!-- Formulário para edição -->

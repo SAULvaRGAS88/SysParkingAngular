@@ -1,5 +1,5 @@
 .card {
-  word-wrap: break-word;
+  min-height: 350px;
 }
 
 .card-text, .card-title, .card-subtitle {
